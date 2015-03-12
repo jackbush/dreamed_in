@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150312190030) do
+ActiveRecord::Schema.define(version: 20150312203153) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,14 @@ ActiveRecord::Schema.define(version: 20150312190030) do
   end
 
   create_table "haiku_engines", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "tweets", force: :cascade do |t|
+    t.string   "username"
+    t.string   "city"
+    t.text     "tweet"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
