@@ -1,8 +1,15 @@
 class HaikuEngine < ActiveRecord::Base
 
   def self.get_user_city (words)
-    results = CLIENT.search('@justinbieber', {lang: "en", count: 2}).attrs[:statuses]
+    results = CLIENT.search('@dreamt_in', {lang: "en", count: 2}).attrs[:statuses]
     tweets = results.map { |tweet| tweet[:text] }
+
+    tweets = results.map do |tweet| 
+      user = tweet[:user][:screen_name] 
+      city = tweet[:text].split(' ')[1..-1].join(' ')
+      "#{user}|#{city}"
+    end
+
     # break down to populate username and city in db
   end
 
