@@ -1,18 +1,8 @@
 class HaikuEngine < ActiveRecord::Base
 
-  def self.old_search_words words
-      a = CLIENT.search('@justinbieber', {lang: "en", count: 5})
-      tweets = []
-      a.each do |tweet|
-        tweets << tweet.text
-      end
-      binding.pry
-      nil
-  end 
-
   def self.get_user_city (words)
-    results = CLIENT.search('@dreamt_in', {lang: "en", count: 5})
-    tweets = results.map { |tweet| tweet.text }
+    results = CLIENT.search('@justinbieber', {lang: "en", count: 2}).attrs[:statuses]
+    tweets = results.map { |tweet| tweet[:text] }
     # break down to populate username and city in db
   end
 
