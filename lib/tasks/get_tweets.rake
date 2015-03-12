@@ -25,6 +25,7 @@ namespace :twitter do
       respond.each do |tweet|
         send = HaikuEngine.haiku_time(tweet.username, tweet.city)
         Tweet.post_tweet(send)
+        tweet.update_attributes(tweet: send)
       end
     rescue
       puts 'ERROR'
