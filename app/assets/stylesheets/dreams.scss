@@ -1,0 +1,112 @@
+// Place all the styles related to the dreams controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+h1 {
+  padding-bottom: 5px;
+  border-bottom: 3px solid black;
+}
+
+h2 {
+  line-height: 1.2;
+}
+
+h3 {
+  padding-bottom: 5px;
+  border-bottom: 3px solid black;
+}
+
+label {
+  margin-top: 22px;
+  display: inline-block;
+  -webkit-margin-before: 1.33em;
+  -webkit-margin-after: 1.33em;
+  -webkit-margin-start: 0px;
+  -webkit-margin-end: 0px;
+  font-weight: bold;
+  font-size: 1em;
+  margin: 1.33em 0;
+}
+
+input {
+  width: 94%;
+  padding: 10px;
+}
+
+input[type="radio"] {
+  display: inline;
+  width: 20px;
+}
+
+.new-dream-button {
+  width: 120px;
+  height: 30px;
+  float: right;
+  background: black;
+  color: white;
+  border: none;
+  line-height: 88%;
+}
+
+.radio {
+  display: inline-block;
+  width: 40%;
+}
+
+.center-contents {
+  margin: 0 auto;
+  text-align: center;
+}
+
+#toggle-index-map {
+  width: 140px;
+  height: 40px;
+  top: 120px;
+  padding: 10px;
+  margin: 20px;
+  background: white;
+  border: 2px solid black;
+  z-index: 100;
+  line-height: 122%;
+}
+
+#about {
+  margin-top: 85px;
+  padding: 20px;
+  width: 450px;
+  float: left;
+  background: #eee;
+}
+
+#form {
+  padding: 20px;
+  width: 450px;
+  float: right;
+  background: #eee;
+}
+
+#map-container {
+  position: absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background-color: #eee;
+  z-index: -100;
+}
+
+#homepage {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.hide-homepage {
+  position: absolute !important;
+  top: -1000px !important;
+}
+
+.hide-map {
+  position: absolute !important;
+  top: -1000px !important;
+}

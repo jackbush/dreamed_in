@@ -1,0 +1,31 @@
+.center-contents
+  %button#toggle-index-map HOME | MAP
+
+#map-container.hide-map
+
+#homepage
+  #about
+    %h1 Dreamed In
+    %h2 The worldwide dream repository. Name and describe your dream in the field to the right, upload a drawing if you'd like, and tell us if it was a daydream or a nightdream, then drop a marker to pin it on the map.
+  #form
+    %h3 Tell us about your dream:
+
+    = form_for @dream do |f|
+
+      = f.label :title
+      = f.text_field :title
+
+      = f.label :description
+      = f.text_field  :description
+
+      = f.label :dream_image
+      = f.file_field :dream_image
+
+      .radio
+        = f.radio_button :daydream, "1"
+        = f.label :daydream, 'Daydream'
+      .radio
+        = f.radio_button :daydream, "0"
+        = f.label :daydream, 'Nightdream'
+
+      = f.submit 'PIN IT', class: 'new-dream-button'

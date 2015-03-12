@@ -1,0 +1,10 @@
+!!!
+%html
+%head
+  %title Dreamed In
+  %script{ type: "text/javascript", src: "https://maps.googleapis.com/maps/api/js?key=AIzaSyCrDCbLiu0Vb8_UNo2pH6OQ64SSN39XWCA"}
+  = stylesheet_link_tag    'application'
+  = javascript_include_tag 'application'
+  = csrf_meta_tags
+%body
+  = yield
