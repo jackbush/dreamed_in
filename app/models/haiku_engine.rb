@@ -1,12 +1,12 @@
 class HaikuEngine < ActiveRecord::Base
 
-  adj = {
+  @adj = {
     1 => %w(clean drab long plain quaint red blue green gray black white dead odd rich shy vast wrong right fierce brave calm kind nice broad deep flat high low steep wide big fat huge large short small tall faint loud brief fast slow late long old short swift young fresh hot loose sweet tart),
     2 => %w(cautious happy pleasant solid proper sunny hungry useful complete extreme alive distinct precise complete intense enough),
     3 => %w(adequate attractive average considered curious customary dangerous difficult exciting favourite liberal persistent substitute terrible typical)
     }
 
-  adv = {
+  @adv = {
     1 => %w(fast),
     2 => %w(always later often shortly slowly sooner under perhaps indeed unless besides until above below before),
     3 => %w(blindingly certainly easily tragically),
@@ -47,19 +47,22 @@ class HaikuEngine < ActiveRecord::Base
     bv = Hash[base_present_verbs.inject(:update).sort_by{|k, v| v}.reverse]
 
     #generate haiku line by line
-    line_1 = "you enter your dream"
 
+    line_1 = "you enter your dream"
+    
     line_2 = "to #{bv.first.first}"
     syllables_left_ln2 = 7 - count_syllables(line_2)
+    
     if syllables_left_ln2 > 0
-      adv = adv[syllables_left_ln2].sample#retreive adverb to complete line_2
-      line_2 = "#{line_2} #{adv}"#add above to end of line 2
+      adv = @adv[syllables_left_ln2].sample
+      line_2 = "#{line_2} #{adv}"
     end
 
     line_3 = "with #{pn.first.first}"
     syllables_left_ln3 = 5 - self.count_syllables(line_3)
+
     if syllables_left_ln3 > 0
-      adj = adj[5-syllables_left_ln3].sample#retreive adjective to complete line_3
+      adj = @adj[syllables_left_ln3].sample
       line_3 = "#{adj} #{line_3}"
     end
 
