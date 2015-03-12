@@ -26,7 +26,6 @@ namespace :twitter do
         name = tweet.username
         city = tweet.city
         response = "@#{name} #{HaikuEngine.haiku_time(name, city)}"
-        binding.pry
         Tweet.post_tweet(response)
         tweet.update_attributes(tweet: response)
       end
