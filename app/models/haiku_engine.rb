@@ -1,38 +1,5 @@
 class HaikuEngine < ActiveRecord::Base
 
-  def self.get_user_city (words)
-    results = CLIENT.search('@dreamt_in', {lang: "en", count: 2}).attrs[:statuses]
-
-    tweets = results.map do |tweet| 
-      user = tweet[:user][:screen_name] 
-      city = tweet[:text].split(' ')[1..-1].join(' ')
-      Tweet.create(username: user, city: city)
-      "#{user}|#{city}"
-    end
-
-  end
-
- def post_tweet (tweet)
-   CLIENT.update(tweet)
- end
-
-  def get_user_tweets (username)
-    results = CLIENT.user_timeline(username, options = {count: 20})
-
-    user_tweets = results.map do |tweet|
-      tweet.text
-    end
-    
-    cleaned_twitter_scrape = user_tweets.map do |tweet|
-      tweet.split(' ').delete_if { |word| word.match(/\.[a-z]/) || word.include?('/') || word == 'RT'}.join(' ')
-    end
-
-  end
-
-  def count_syllables (to_be_counted)
-    Odyssey.flesch_kincaid_re(to_be_counted, true)["syllable_count"]
-  end
-
   adj = {
     1 => %w(clean drab long plain quaint red blue green gray black white dead odd rich shy vast wrong right fierce brave calm kind nice broad deep flat high low steep wide big fat huge large short small tall faint loud brief fast slow late long old short swift young fresh hot loose sweet tart),
     2 => %w(cautious happy pleasant solid proper sunny hungry useful complete extreme alive distinct precise complete intense enough),
@@ -47,8 +14,24 @@ class HaikuEngine < ActiveRecord::Base
     5 => %w(figuratively)
     }
 
-  def haiku_time (user, city)
-    user_words = get_user_tweets(user) #is an array of strings
+  def self.get_user_tweets (username)
+    results = CLIENT.user_timeline(username, options = {count: 20})
+    user_tweets = results.map do |tweet|
+      tweet.text
+    end
+    
+    cleaned_twitter_scrape = user_tweets.map do |tweet|
+      tweet.split(' ').delete_if { |word| word.match(/\.[a-z]/) || word.include?('/') || word == 'RT'}.join(' ')
+    end
+  end
+
+  def self.count_syllables (to_be_counted)
+    Odyssey.flesch_kincaid_re(to_be_counted, true)["syllable_count"]
+  end
+
+  def self.haiku_time (user, city)
+
+    user_words = self.get_user_tweets(user) #is an array of strings
     tgr = EngTagger.new
 
     #return proper nouns from user
@@ -67,19 +50,25 @@ class HaikuEngine < ActiveRecord::Base
     line_1 = "you enter your dream"
 
     line_2 = "to #{bv.first.first}"
-    syllables_left_ln2 = 7-count_syllables(line_2)
-    adv = adv[syllables_left_ln2].sample#retreive adverb to complete line_2
-    line_2 = "#{line_2} #{adv}"#add above to end of line 2
+    syllables_left_ln2 = 7 - count_syllables(line_2)
+    if syllables_left_ln2 > 0
+      adv = adv[syllables_left_ln2].sample#retreive adverb to complete line_2
+      line_2 = "#{line_2} #{adv}"#add above to end of line 2
+    end
 
     line_3 = "with #{pn.first.first}"
-    syllables_left_ln3 = 5-count_syllables(line_3)
-    adj = adj[5-syllables_left_ln3].sample#retreive adjective to complete line_3
-    line_3 = "#{adj} #{line_3}"
+    syllables_left_ln3 = 5 - self.count_syllables(line_3)
+    if syllables_left_ln3 > 0
+      adj = adj[5-syllables_left_ln3].sample#retreive adjective to complete line_3
+      line_3 = "#{adj} #{line_3}"
+    end
 
     haiku = "#{line_1} / #{line_2} / #{line_3}".downcase
-    post_tweet(haiku)
     
   end
+
+
+
 
 
 

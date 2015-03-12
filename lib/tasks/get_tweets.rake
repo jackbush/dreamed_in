@@ -23,12 +23,16 @@ namespace :twitter do
     begin
       respond = Tweet.where(tweet: nil)
       respond.each do |tweet|
-        send = HaikuEngine.haiku_time(tweet.username, tweet.city)
-        Tweet.post_tweet(send)
-        tweet.update_attributes(tweet: send)
+        name = tweet.username
+        city = tweet.city
+        binding.pry
+        response = HaikuEngine.haiku_time(name, city)
+        Tweet.post_tweet(response)
+        tweet.update_attributes(tweet: response)
       end
     rescue
       puts 'ERROR'
     end
   end
+
 end
