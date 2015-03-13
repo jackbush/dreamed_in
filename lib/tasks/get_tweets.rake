@@ -4,13 +4,14 @@ namespace :twitter do
   task get_tweets: :environment do
     puts 'FETCHING TWEETS...'
     begin
-      results = CLIENT.search('@dreamt_in', {lang: "en", count: 11}).attrs[:statuses]
+      results = CLIENT.search('@dreamt_in', {count: 11}).attrs[:statuses]
       tweets = results.map { |tweet| tweet[:text] }
 
-      tweets = results.each do |tweet| 
+      tweets = results.each do |tweet|
         user = tweet[:user][:screen_name] 
         city = tweet[:text].split(' ')[1..-1].join(' ')
         Tweet.find_or_create_by(username: user, city: city)
+        puts "#{user} | #{city}"
       end
 
       puts "#{tweets.count} TWEETS RECEIVED"
@@ -27,7 +28,7 @@ namespace :twitter do
     puts 'CRAFTING RESPONSES...'
     begin
       respond = Tweet.where(tweet: nil)
-
+      binding.pry
       respond.each do |tweet|
         name = tweet.username
         city = tweet.city
