@@ -29,11 +29,6 @@ h4 {
   font-weight: normal;
 }
 
-h5 {
-  font-size: 14px;
-  color: red;
-}
-
 label {
   display: inline-block;
   font-weight: bold;
@@ -165,12 +160,16 @@ input[type="file"] {
 
 #info-window-content {
   width: 300px;
+  margin-left: 20px;
+  padding-bottom: 20px;
 }
 
-#info-window-content h4 a {
-  font-size: 18px;
-  color: black;
-  text-decoration: none;
+#info-window-content h5 {
+  font-size: 16px;
+}
+
+#info-window-content p {
+  font-size: 12px;
 }
 
 #info-window-content img {

@@ -1,16 +1,3 @@
-function smoothZoom (map, max, cnt) {
-  if (cnt >= max) {
-      return;
-    }
-  else {
-    z = google.maps.event.addListener(map, 'zoom_changed', function(event){
-        google.maps.event.removeListener(z);
-        smoothZoom(map, max, cnt + 1);
-    });
-    setTimeout(function(){map.setZoom(cnt)}, 80);
-  }
-}
-
 function addInfoWindows(map) {
   $.ajax({
     type: 'GET',
@@ -26,9 +13,7 @@ function addInfoWindows(map) {
         title: dream.title
       });
       
-      var infoWindowContent = '<div id="info-window-content"><h5>' + dream.title + '</h5><img src="' + dream.dream_image.url + '"><p>' + dream.description + '</p></div>';
-
-          // <a href="' + window.location.origin + '/dreams/' + dream.id + '"></a>
+      var infoWindowContent = '<div id="info-window-content"><img src="' + dream.dream_image.url + '"><h5>' + dream.title + '</h5><p>' + dream.description + '</p></div>';
 
       var infowindow = new google.maps.InfoWindow({
           content: infoWindowContent
@@ -54,14 +39,10 @@ function initMap() {
   var map = new google.maps.Map(document.getElementById('map-container'), mapOptions);
   addInfoWindows(map);
   google.maps.event.addListener(map, 'click', function(event) {
-    console.log(event.latLng);
-    // clear any current instance of the below marker
-    // or clear all markers and move :51 way down
     var marker = new google.maps.Marker({
-        // set marker icon to some different
-        // is there a marker id arg?
         position: new google.maps.LatLng(event.latLng.k, event.latLng.D),
         map: map,
+        title: 'newLocation'
       });
     $('#lat-field').val(event.latLng.k)
     $('#long-field').val(event.latLng.D)
@@ -70,11 +51,6 @@ function initMap() {
 
 $(document).ready(function() {
   google.maps.event.addDomListener(window, 'load', initMap)
-
-  $('button#toggle-index-map').click(function() {
-    // $("#map-container").toggleClass('hide-map');
-    $("#homepage").toggleClass('hide-homepage');
-  });
 
   $('#form').hide()
 
@@ -91,20 +67,4 @@ $(document).ready(function() {
     return false;
   });
 
-  // changing new dream creation to an ajax request
-  // $('button#new-dream-button').click(function(event) {
-  //   event.preventDefault()
-  //   
-  // });
-
 })
-
-
-// center on user by adding this after info windows
-// if (navigator.geolocation) {
-//     navigator.geolocation.getCurrentPosition(function (position) {
-//        initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-//        map.setCenter(initialLocation);
-//        smoothZoom(map, 13, 8);
-//     });
-//   }
