@@ -38,19 +38,19 @@ class HaikuEngine < ActiveRecord::Base
     proper_noun = user_words.map do |tweet|
       tgr.get_proper_nouns(tgr.add_tags(tweet))
     end
-    pn = Hash[proper_noun.inject(:update).sort_by{|k, v| v}.reverse]
+    pn = Hash[proper_noun.inject(:update)].keys#.sort_by{|k, v| v}.reverse]
 
     #return basic verbs from user
     base_present_verbs = user_words.map do |tweet|
       tgr.get_base_present_verbs(tgr.add_tags(tweet))
     end
-    bv = Hash[base_present_verbs.inject(:update).sort_by{|k, v| v}.reverse]
+    bv = Hash[base_present_verbs.inject(:update)].keys#.sort_by{|k, v| v}.reverse]
 
     #generate haiku line by line
 
     line_1 = "you enter your dream"
     
-    line_2 = "to #{bv.first.sample}"
+    line_2 = "to #{bv.sample}"
     syllables_left_ln2 = 7 - count_syllables(line_2)
     
     if syllables_left_ln2 > 0
@@ -58,7 +58,7 @@ class HaikuEngine < ActiveRecord::Base
       line_2 = "#{line_2} #{adv}"
     end
 
-    line_3 = "with #{pn.first.sample}"
+    line_3 = "with #{pn.sample}"
     syllables_left_ln3 = 5 - self.count_syllables(line_3)
 
     if syllables_left_ln3 > 0
