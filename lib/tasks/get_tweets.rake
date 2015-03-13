@@ -4,7 +4,7 @@ namespace :twitter do
   task get_tweets: :environment do
     puts 'FETCHING TWEETS...'
     begin
-      results = CLIENT.search('@dreamt_in', {lang: "en", count: 2}).attrs[:statuses]
+      results = CLIENT.search('@dreamt_in', {lang: "en", count: 11}).attrs[:statuses]
       tweets = results.map { |tweet| tweet[:text] }
 
       tweets = results.each do |tweet| 

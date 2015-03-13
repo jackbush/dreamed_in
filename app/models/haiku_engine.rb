@@ -15,7 +15,7 @@ class HaikuEngine < ActiveRecord::Base
     }
 
   def self.get_user_tweets (username)
-    results = CLIENT.user_timeline(username, options = {count: 20})
+    results = CLIENT.user_timeline(username, options = {count: 15})
     user_tweets = results.map do |tweet|
       tweet.text
     end
@@ -87,7 +87,7 @@ class HaikuEngine < ActiveRecord::Base
       line_3 = "with #{line_3}"
     end
     
-    if @length > 15 
+    if @length > 14
       haiku = "#{line_1} / #{line_2} / #{line_3}".downcase
     else 
       haiku = "serious error / you don't tweet enough to dream / in faraway lands"
