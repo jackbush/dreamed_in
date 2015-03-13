@@ -163,6 +163,8 @@ input[type="file"] {
   width: 300px;
   margin-left: 20px;
   padding-bottom: 20px;
+  max-height: 400px;
+  overflow: scroll;
 }
 
 #info-window-content h5 {
