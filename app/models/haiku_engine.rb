@@ -53,6 +53,11 @@ class HaikuEngine < ActiveRecord::Base
   def self.haiku_time (user, city)
 
     user_words = self.get_user_tweets(user) #is an array of strings
+
+    if @length < 15
+      return "serious error / you don't tweet enough to dream / in faraway lands"
+    end
+
     @tgr = EngTagger.new
  
     #return proper nouns from user's tweets
@@ -87,13 +92,7 @@ class HaikuEngine < ActiveRecord::Base
       line_3 = "with #{line_3}"
     end
     
-    if @length > 14
-      haiku = "#{line_1} / #{line_2} / #{line_3}".downcase
-    else 
-      haiku = "serious error / you don't tweet enough to dream / in faraway lands"
-    end
-
-    haiku
+    "#{line_1} / #{line_2} / #{line_3}".downcase
   end
 
 end
