@@ -12,7 +12,10 @@ namespace :twitter do
         city = tweet[:text].split(' ')[1..-1].join(' ')
         Tweet.find_or_create_by(username: user, city: city)
       end
-      puts "#{tweets.count} TWEETS ADDED"
+      puts "#{tweets.count} TWEETS RECEIVED"
+      if tweets.count > 0
+        Rake::Task["twitter:respond_to_tweets"].execute
+      end
     rescue
       puts 'ERROR'
     end
