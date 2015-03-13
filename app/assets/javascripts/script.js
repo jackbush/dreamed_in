@@ -17,9 +17,6 @@ function addInfoWindows(map) {
     url: '/',
     dataType: 'json'
   })
-  // .done(function(data){
-  //   console.log(data)
-  // })
   .done(function(response){
     $.each(response, function(index, dream){
       var position = new google.maps.LatLng(dream.location_lat, dream.location_long);
@@ -50,10 +47,29 @@ function initMap() {
   };
   var map = new google.maps.Map(document.getElementById('map-container'), mapOptions);
   addInfoWindows(map);
+  google.maps.event.addListener(map, 'click', function(event) {
+    console.log(event.latLng);
+    $('#lat-field').val('hi')
+    $('#long-field').text('hi')
+  });
 }
 
 $(document).ready(function() {
   google.maps.event.addDomListener(window, 'load', initMap)
+
+  $('button#toggle-index-map').click(function() {
+    $("#map-container").toggleClass('hide-map');
+    $("#homepage").toggleClass('hide-homepage');
+  });
+
+  $('button#new-dream-button').click(function(event) {
+    event.preventDefault()
+    $("#map-container").toggleClass('hide-map');
+    $("#homepage").toggleClass('hide-homepage');
+  });
+
+
+
 })
 
 

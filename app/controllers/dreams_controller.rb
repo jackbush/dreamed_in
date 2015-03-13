@@ -15,11 +15,11 @@ class DreamsController < ApplicationController
   def create
     binding.pry
     @dream = Dream.create(dream_params)
-    redirect_to edit_dream_path @dream
+    redirect_to root_path
   end
 
   private
   def dream_params
-    params.require(:dream).permit(:title, :description, :dream_image, :daydream)
+    params.require(:dream).permit(:title, :description, :location_lat, :location_long, :dream_image, :daydream)
   end
 end

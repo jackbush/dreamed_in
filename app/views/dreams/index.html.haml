@@ -18,6 +18,9 @@
       = f.label :description
       = f.text_field  :description
 
+      = f.text_field  :location_lat, id: 'lat-field'
+      = f.text_field  :location_long, id: 'long-field'
+
       = f.label :dream_image
       = f.file_field :dream_image
 
@@ -28,4 +31,4 @@
         = f.radio_button :daydream, "0"
         = f.label :daydream, 'Nightdream'
 
-      = f.submit 'PIN IT', class: 'new-dream-button'
+      = f.submit 'PIN IT', id: 'new-dream-button'
