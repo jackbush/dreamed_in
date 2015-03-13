@@ -12,12 +12,14 @@ namespace :twitter do
         city = tweet[:text].split(' ')[1..-1].join(' ')
         Tweet.find_or_create_by(username: user, city: city)
       end
+
       puts "#{tweets.count} TWEETS RECEIVED"
+      
       if tweets.count > 0
         Rake::Task["twitter:respond_to_tweets"].execute
       end
-    rescue
-      puts 'ERROR'
+    rescue => e
+      puts "ERROR: #{e}"
     end
   end
 
@@ -25,6 +27,7 @@ namespace :twitter do
     puts 'CRAFTING RESPONSES...'
     begin
       respond = Tweet.where(tweet: nil)
+
       respond.each do |tweet|
         name = tweet.username
         city = tweet.city
@@ -33,10 +36,10 @@ namespace :twitter do
         tweet.update_attributes(tweet: response)
         puts response
       end
+      
       puts 'SENT'
     rescue => e
-      puts e
-      puts 'ERROR'
+      puts "ERROR: #{e}"
     end
   end
 
