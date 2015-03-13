@@ -1,14 +1,17 @@
-.center-contents
-  %button#toggle-index-map HOME | MAP
+-# .center-contents
+-#   %button#toggle-index-map HOME | MAP
 
-#map-container.hide-map
+#map-container
+-# .hide-map
 
 #homepage
   #about
-    %h1 Dreamed In
+    %span.close &times;
+    %h1 Dreamt In
     %h2 The worldwide dream repository. Name and describe your dream in the field to the right, upload a drawing if you'd like, and tell us if it was a daydream or a nightdream, then drop a marker to pin it on the map.
-  #form
-    %h3 Tell us about your dream:
+  #form.collapsed
+    %h3#toggle-form TELL US ABOUT YOUR DREAM
+    %h4 Click a location on the map to submit.
 
     = form_for @dream do |f|
 
@@ -18,8 +21,8 @@
       = f.label :description
       = f.text_field  :description
 
-      = f.text_field  :location_lat, id: 'lat-field'
-      = f.text_field  :location_long, id: 'long-field'
+      = f.hidden_field  :location_lat, id: 'lat-field'
+      = f.hidden_field  :location_long, id: 'long-field'
 
       = f.label :dream_image
       = f.file_field :dream_image

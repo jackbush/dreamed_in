@@ -2,7 +2,10 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-
+.close {
+  float: right;
+  cursor: pointer;
+}
 h1 {
   padding-bottom: 5px;
   border-bottom: 3px solid black;
@@ -15,6 +18,16 @@ h2 {
 h3 {
   padding-bottom: 5px;
   border-bottom: 3px solid black;
+}
+
+h4 {
+  font-style: italic;
+  font-weight: normal;
+}
+
+h5 {
+  font-size: 14px;
+  color: red;
 }
 
 label {
@@ -72,6 +85,7 @@ input[type="radio"] {
 }
 
 #about {
+  margin-left: 40px;
   margin-top: 85px;
   padding: 20px;
   width: 450px;
@@ -80,10 +94,22 @@ input[type="radio"] {
 }
 
 #form {
+  position: fixed;
+  right: 40px;
+  bottom: 40px;
   padding: 20px;
   width: 450px;
-  float: right;
   background: #eee;
+  overflow: hidden;
+  transition: 0.5s;
+}
+
+.collapsed {
+  height: 40px;
+}
+
+#toggle-form {
+  cursor: pointer;
 }
 
 #map-container {

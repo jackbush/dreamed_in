@@ -26,14 +26,17 @@ function addInfoWindows(map) {
         title: dream.title
       });
       
-      var infoWindowContent = '<div id="info-window-content"><a href="' + window.location.origin + '/dreams/' + dream.id + '"><h4>' + dream.title + '</h4></a><img src="' + dream.dream_image.url + '"><p>' + dream.description + '</p></div>';
+      var infoWindowContent = '<div id="info-window-content"><h5>' + dream.title + '</h5><img src="' + dream.dream_image.url + '"><p>' + dream.description + '</p></div>';
+
+          // <a href="' + window.location.origin + '/dreams/' + dream.id + '"></a>
 
       var infowindow = new google.maps.InfoWindow({
           content: infoWindowContent
       });
       google.maps.event.addListener(marker, 'click', function() {
-        // close any current infowindows -- is there a close function?
-        $('#info-window-content').hide();
+        $('*[id*=info-window-content]:visible').each(function() {
+          $(this).parent().parent().parent().parent().hide();
+        });
         infowindow.open(map, marker);
       });
     });
@@ -42,8 +45,9 @@ function addInfoWindows(map) {
 
 function initMap() {
   var mapOptions = {
-    center: new google.maps.LatLng(20.519889, -0.068799),
-    zoom: 6,
+    center: new google.maps.LatLng(40.519889, -30.068799),
+    zoom: 3,
+    disableDefaultUI: true,
 
     styles: [{"featureType":"administrative","elementType":"all","stylers":[{"visibility":"on"},{"lightness":33}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#f2e5d4"}]},{"featureType":"poi.park","elementType":"geometry","stylers":[{"color":"#c5dac6"}]},{"featureType":"poi.park","elementType":"labels","stylers":[{"visibility":"on"},{"lightness":20}]},{"featureType":"road","elementType":"all","stylers":[{"lightness":20}]},{"featureType":"road.highway","elementType":"geometry","stylers":[{"color":"#c5c6c6"}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#e4d7c6"}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#fbfaf7"}]},{"featureType":"water","elementType":"all","stylers":[{"visibility":"on"},{"color":"#acbcc9"}]}],
   };
@@ -56,11 +60,11 @@ function initMap() {
     var marker = new google.maps.Marker({
         // set marker icon to some different
         // is there a marker id arg?
-        position: new google.maps.LatLng(event.latLng),
+        position: new google.maps.LatLng(event.latLng.k, event.latLng.D),
         map: map,
       });
-    $('#lat-field').val('hi')
-    $('#long-field').text('hi')
+    $('#lat-field').val(event.latLng.k)
+    $('#long-field').val(event.latLng.D)
   });
 }
 
@@ -68,9 +72,17 @@ $(document).ready(function() {
   google.maps.event.addDomListener(window, 'load', initMap)
 
   $('button#toggle-index-map').click(function() {
-    $("#map-container").toggleClass('hide-map');
+    // $("#map-container").toggleClass('hide-map');
     $("#homepage").toggleClass('hide-homepage');
   });
+
+  $('.close').click(function() {
+    $('#about').hide()
+  })
+
+  $('#toggle-form').click(function() {
+    $('#form').toggleClass('collapsed')
+  })
 
   // changing new dream creation to an ajax request
   // $('button#new-dream-button').click(function(event) {
