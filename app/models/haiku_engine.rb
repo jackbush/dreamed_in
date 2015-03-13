@@ -31,47 +31,6 @@ class HaikuEngine < ActiveRecord::Base
     Odyssey.flesch_kincaid_re(to_be_counted, true)["syllable_count"]
   end
 
-  def self.haiku_time (user, city)
-
-    user_words = self.get_user_tweets(user) #is an array of strings
-    tgr = EngTagger.new
-
-    #return proper nouns from user
-    proper_noun = user_words.map do |tweet|
-      tgr.get_proper_nouns(tgr.add_tags(tweet))
-    end
-    pn = Hash[proper_noun.inject(:update)].keys#.sort_by{|k, v| v}.reverse]
-
-    #return basic verbs from user
-    base_present_verbs = user_words.map do |tweet|
-      tgr.get_base_present_verbs(tgr.add_tags(tweet))
-    end
-    bv = Hash[base_present_verbs.inject(:update)].keys#.sort_by{|k, v| v}.reverse]
-
-    #generate haiku line by line
-
-    line_1 = "you enter your dream"
-    
-    line_2 = "to #{bv.sample}"
-    syllables_left_ln2 = 7 - count_syllables(line_2)
-    
-    if syllables_left_ln2 > 0
-      adv = @adv[syllables_left_ln2].sample
-      line_2 = "#{line_2} #{adv}"
-    end
-
-    line_3 = "with #{pn.sample}"
-    syllables_left_ln3 = 5 - self.count_syllables(line_3)
-
-    if syllables_left_ln3 > 0
-      adj = @adj[syllables_left_ln3].sample
-      line_3 = "#{adj} #{line_3}"
-    end
-
-    haiku = "#{line_1} / #{line_2} / #{line_3}".downcase
-    
-  end
-
   def self.proper_nouns(user_words)
     proper_noun = user_words.map do |tweet|
       @tgr.get_proper_nouns(@tgr.add_tags(tweet))
@@ -91,7 +50,7 @@ class HaikuEngine < ActiveRecord::Base
     @bv = verbs.delete_if {|x| x.start_with?("'") }
   end
 
-  def self.better_haiku_time (user, city)
+  def self.haiku_time (user, city)
 
     user_words = self.get_user_tweets(user) #is an array of strings
     @tgr = EngTagger.new
