@@ -29,13 +29,13 @@
           = f.file_field :dream_image
         %button#no-action UPLOAD IMAGE
 
-      %br
-      .radio
-        = f.radio_button :daydream, "1"
-        = f.label :daydream, 'Daydream'
-      %br
-      .radio
-        = f.radio_button :daydream, "0"
-        = f.label :daydream, 'Nightdream'
+      -# %br
+      -# .radio
+      -#   = f.radio_button :daydream, "1"
+      -#   = f.label :daydream, 'Daydream'
+      -# %br
+      -# .radio
+      -#   = f.radio_button :daydream, "0"
+      -#   = f.label :daydream, 'Nightdream'
 
       = f.submit 'PIN IT', id: 'new-dream-button'
