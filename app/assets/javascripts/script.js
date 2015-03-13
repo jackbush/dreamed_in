@@ -72,13 +72,11 @@ $(document).ready(function() {
     $("#homepage").toggleClass('hide-homepage');
   });
 
-  $('button#new-dream-button').click(function(event) {
-    event.preventDefault()
-    $("#map-container").toggleClass('hide-map');
-    $("#homepage").toggleClass('hide-homepage');
-  });
-
-
+  // changing new dream creation to an ajax request
+  // $('button#new-dream-button').click(function(event) {
+  //   event.preventDefault()
+  //   
+  // });
 
 })
 
