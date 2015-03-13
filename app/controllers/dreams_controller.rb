@@ -2,6 +2,10 @@ class DreamsController < ApplicationController
   def index
     @dream = Dream.new
     @dreams = Dream.all
+    respond_to do |format|
+      format.html
+      format.json { render json: @dreams }
+    end
   end
 
   def show
@@ -11,7 +15,7 @@ class DreamsController < ApplicationController
   def create
     binding.pry
     @dream = Dream.create(dream_params)
-    redirect_to dreams_path
+    redirect_to edit_dream_path @dream
   end
 
   private

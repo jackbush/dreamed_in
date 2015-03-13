@@ -96,6 +96,20 @@ input[type="radio"] {
   z-index: -100;
 }
 
+#info-window-content {
+  width: 300px;
+}
+
+#info-window-content h4 a {
+  font-size: 18px;
+  color: black;
+  text-decoration: none;
+}
+
+#info-window-content img {
+  width: 100%;
+}
+
 #homepage {
   width: 90%;
   margin: 0 auto;
