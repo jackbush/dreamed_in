@@ -50,7 +50,7 @@ class HaikuEngine < ActiveRecord::Base
 
     line_1 = "you enter your dream"
     
-    line_2 = "to #{bv.first.first}"
+    line_2 = "to #{bv.first.sample}"
     syllables_left_ln2 = 7 - count_syllables(line_2)
     
     if syllables_left_ln2 > 0
@@ -58,7 +58,7 @@ class HaikuEngine < ActiveRecord::Base
       line_2 = "#{line_2} #{adv}"
     end
 
-    line_3 = "with #{pn.first.first}"
+    line_3 = "with #{pn.first.sample}"
     syllables_left_ln3 = 5 - self.count_syllables(line_3)
 
     if syllables_left_ln3 > 0

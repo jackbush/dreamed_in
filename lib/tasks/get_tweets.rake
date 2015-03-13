@@ -12,7 +12,7 @@ namespace :twitter do
         city = tweet[:text].split(' ')[1..-1].join(' ')
         Tweet.find_or_create_by(username: user, city: city)
       end
-      puts 'SUCCESS'
+      puts "#{tweets.count} TWEETS ADDED"
     rescue
       puts 'ERROR'
     end
@@ -28,7 +28,9 @@ namespace :twitter do
         response = "@#{name} #{HaikuEngine.haiku_time(name, city)}"
         Tweet.post_tweet(response)
         tweet.update_attributes(tweet: response)
+        puts response
       end
+      puts 'SENT'
     rescue
       puts 'ERROR'
     end
