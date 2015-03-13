@@ -8,10 +8,13 @@
   #about
     %span.close &times;
     %h1 Dreamt In
-    %h2 The worldwide dream repository. Name and describe your dream in the field to the right, upload a drawing if you'd like, and tell us if it was a daydream or a nightdream, then drop a marker to pin it on the map.
+    %h2 Welcome to our worldwide dream repository. Browse people's dreams by clicking on the markers and place your own on the map using the form.
+    %h2
+      Catch us on twitter 
+      %a{:href => "https://twitter.com/dreamt_in"} here.
   #form.collapsed
     %h3#toggle-form TELL US ABOUT YOUR DREAM
-    %h4 Click a location on the map to submit.
+    %h4 Click a place on the map to set the location.
 
     = form_for @dream do |f|
 
@@ -24,12 +27,17 @@
       = f.hidden_field  :location_lat, id: 'lat-field'
       = f.hidden_field  :location_long, id: 'long-field'
 
-      = f.label :dream_image
-      = f.file_field :dream_image
+      -# = f.label :dream_image, 'Dream Image'
+      #upload
+        .wrapper
+          = f.file_field :dream_image
+        %button#no-action UPLOAD IMAGE
 
+      %br
       .radio
         = f.radio_button :daydream, "1"
         = f.label :daydream, 'Daydream'
+      %br
       .radio
         = f.radio_button :daydream, "0"
         = f.label :daydream, 'Nightdream'

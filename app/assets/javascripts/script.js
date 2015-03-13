@@ -45,7 +45,7 @@ function addInfoWindows(map) {
 
 function initMap() {
   var mapOptions = {
-    center: new google.maps.LatLng(40.519889, -30.068799),
+    center: new google.maps.LatLng(30, -25),
     zoom: 3,
     disableDefaultUI: true,
 
@@ -76,13 +76,20 @@ $(document).ready(function() {
     $("#homepage").toggleClass('hide-homepage');
   });
 
+  $('#form').hide()
+
   $('.close').click(function() {
     $('#about').hide()
+    $('#form').show()
   })
 
   $('#toggle-form').click(function() {
     $('#form').toggleClass('collapsed')
   })
+
+  $("#no-action").click(function () {
+    return false;
+  });
 
   // changing new dream creation to an ajax request
   // $('button#new-dream-button').click(function(event) {

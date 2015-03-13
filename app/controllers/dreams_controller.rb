@@ -13,13 +13,8 @@ class DreamsController < ApplicationController
   end
 
   def create
-    binding.pry
     @dream = Dream.create(dream_params)
     redirect_to root_path
-    # respond_to do |format|
-    #   format.html redirect here?
-    #   format.json { render json: @dreams }
-    # end
   end
 
   private

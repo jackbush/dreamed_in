@@ -15,6 +15,10 @@ h2 {
   line-height: 1.2;
 }
 
+h2 a {
+  color: black;
+}
+
 h3 {
   padding-bottom: 5px;
   border-bottom: 3px solid black;
@@ -31,15 +35,11 @@ h5 {
 }
 
 label {
-  margin-top: 22px;
   display: inline-block;
-  -webkit-margin-before: 1.33em;
-  -webkit-margin-after: 1.33em;
-  -webkit-margin-start: 0px;
-  -webkit-margin-end: 0px;
   font-weight: bold;
   font-size: 1em;
-  margin: 1.33em 0;
+  margin-top: 30px;
+  margin-bottom: 10px;
 }
 
 input {
@@ -47,9 +47,54 @@ input {
   padding: 10px;
 }
 
+.radio {
+  display: inline-block;
+  width: 40%;
+}
+
+.radio label {
+  margin-top: 12px;
+  margin-bottom: 0;
+}
+
 input[type="radio"] {
   display: inline;
   width: 20px;
+  margin-top: -20px;
+}
+
+input[type="file"] {
+  display: inline;
+  width: 200px;
+  margin-bottom: 14px;
+}
+
+#upload {
+  display: inline;
+    position: relative;
+}
+
+#upload .wrapper {
+    opacity: 0;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    z-index: 2;
+}
+
+#upload button {
+  width: 170px;
+  height: 30px;
+  background-color: white;
+  border: none;
+  color: black;
+  padding: 3px 5px;
+  position: relative;
+  top: 0;
+  z-index: 1;
+  margin-top: 20px;
+  margin-bottom: 5px;
+  line-height: 180%;
 }
 
 #new-dream-button {
@@ -60,11 +105,7 @@ input[type="radio"] {
   color: white;
   border: none;
   line-height: 88%;
-}
-
-.radio {
-  display: inline-block;
-  width: 40%;
+  margin-right: 2px;
 }
 
 .center-contents {
@@ -86,7 +127,7 @@ input[type="radio"] {
 
 #about {
   margin-left: 40px;
-  margin-top: 85px;
+  margin-top: 100px;
   padding: 20px;
   width: 450px;
   float: left;
