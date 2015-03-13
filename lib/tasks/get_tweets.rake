@@ -28,7 +28,7 @@ namespace :twitter do
       respond.each do |tweet|
         name = tweet.username
         city = tweet.city
-        response = "@#{name} #{HaikuEngine.haiku_time(name, city)}"
+        response = "@#{name} #{HaikuEngine.better_haiku_time(name, city)}"
         Tweet.post_tweet(response)
         tweet.update_attributes(tweet: response)
         puts response
@@ -36,24 +36,6 @@ namespace :twitter do
       puts 'SENT'
     rescue => e
       puts e
-      puts 'ERROR'
-    end
-  end
-
-  task test: :environment do
-    puts 'CRAFTING RESPONSES in test...'
-    begin
-      respond = Tweet.where(tweet: nil)
-      respond.each do |tweet|
-        name = tweet.username
-        city = tweet.city
-        response = "@#{name} #{HaikuEngine.better_haiku_time(name, city)}"
-        Tweet.post_tweet(response)
-        tweet.update_attributes(tweet: response)
-        puts response
-      end
-      puts 'SENT'
-    rescue
       puts 'ERROR'
     end
   end
