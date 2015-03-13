@@ -31,6 +31,7 @@ group :development, :test do
   #default
 
   gem 'byebug'
+  gem 'pry-byebug'
   gem 'pry-rails'
   gem 'web-console', '~> 2.0'
   gem 'spring'
