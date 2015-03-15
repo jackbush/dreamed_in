@@ -28,7 +28,6 @@ namespace :twitter do
     puts 'CRAFTING RESPONSES...'
     begin
       respond = Tweet.where(tweet: nil)
-      binding.pry
       respond.each do |tweet|
         name = tweet.username
         city = tweet.city
